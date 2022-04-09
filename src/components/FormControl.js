@@ -8,6 +8,7 @@ function FormControl(props) {
         name={props.name}
         value={props.value}
         onChange={props.onChange}
+        checked={props.checked}
       />
     </div>
   );

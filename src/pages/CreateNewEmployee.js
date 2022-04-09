@@ -12,15 +12,37 @@ function CreateNewEmployee() {
     function: "",
     area: "",
     workRegime: "",
-    daysOfTheWeek: "[]",
+    daysOfTheWeek: [],
     image: "",
+    Office: "",
   });
 
   const navigate = useNavigate();
+  const allDays = [
+    "Segunda-feira",
+    "Terça-feira",
+    "Quarta-feira",
+    "Quinta-feira",
+    "Sexta-feira",
+  ];
 
   function handleChange(event) {
-    setNewEmployee({ ...newEmployee, [event.target.name]: event.target.value });
+    setNewEmployee({
+      ...newEmployee,
+      [event.target.name]: event.target.value,
+    });
+    // }
   }
+  const handleCheck = (event) => {
+    let updatedList = [...newEmployee.daysOfTheWeek];
+    if (event.target.checked) {
+      updatedList.push(event.target.value);
+    } else {
+      updatedList.splice(updatedList.indexOf(event.target.value), 1);
+    }
+
+    setNewEmployee({ ...newEmployee, daysOfTheWeek: updatedList });
+  };
 
   function handleSubmit(event) {
     event.preventDefault();
@@ -31,6 +53,7 @@ function CreateNewEmployee() {
       )
       .then((response) => {
         console.log(response.data);
+        navigate(`/:${response.data.insertedId}`);
       })
       .catch((err) => {
         console.error(err);
@@ -41,6 +64,14 @@ function CreateNewEmployee() {
     <div>
       <h1>Novo Funcionário</h1>
       <form onSubmit={handleSubmit}>
+        <FormControl
+          label="Carregar Foto"
+          id="employeeImage"
+          name="image"
+          onChange={handleChange}
+          value={newEmployee.image}
+        />
+
         <FormControl
           label="Nome"
           id="employeeCreateName"
@@ -55,31 +86,55 @@ function CreateNewEmployee() {
           name="birthDate"
           onChange={handleChange}
           value={newEmployee.birthDate}
+          type="date"
         />
 
         <FormControl
-          label="Nome"
-          id="employeeCreateName"
-          name="name"
+          label="Contato"
+          id="employeeContact"
+          name="contact"
           onChange={handleChange}
-          value={newEmployee.name}
+          value={newEmployee.contact}
         />
 
         <FormControl
-          label="Nome"
-          id="employeeCreateName"
-          name="name"
+          label="Função"
+          id="employeeFunction"
+          name="function"
           onChange={handleChange}
-          value={newEmployee.name}
+          value={newEmployee.function}
         />
 
         <FormControl
-          label="Nome"
-          id="employeeCreateName"
-          name="name"
+          label="Área"
+          id="employeeArea"
+          name="area"
           onChange={handleChange}
-          value={newEmployee.name}
+          value={newEmployee.area}
         />
+
+        <FormControl
+          label="Regime de Trabalho"
+          id="employeeWorkRegime"
+          name="workRegime"
+          onChange={handleChange}
+          value={newEmployee.workRegime}
+        />
+        <div>Dias de Trabalho:</div>
+        {allDays.map((currentDay, index) => {
+          return (
+            <FormControl
+              key={index}
+              label={currentDay}
+              id="employeeDaysOfTheWeek"
+              name="daysOfTheWeek"
+              onChange={handleCheck}
+              value={currentDay}
+              type="checkbox"
+            />
+          );
+        })}
+        <button type="submit">Salvar alterações</button>
       </form>
     </div>
   );

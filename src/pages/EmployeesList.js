@@ -1,12 +1,22 @@
 import axios from "axios";
 import React from "react";
 import { useEffect, useState } from "react";
+import { styled } from '@mui/material/styles';
+import Grid from '@mui/material/Grid';
+import Paper from '@mui/material/Paper';
 
 
 
 function EmployeesList() {
 
     const [employees, setEmployees] = useState([]);
+
+    const Img = styled('img')({
+        margin: 'auto',
+        display: 'block',
+        maxWidth: '100%',
+        maxHeight: '100%',
+      });
 
   
     useEffect(() => {
@@ -24,21 +34,37 @@ function EmployeesList() {
     return (
         <div>
 
+     <Paper
+      sx={{
+        p: 2,
+        margin: 'auto',
+        maxWidth: 500,
+        flexGrow: 1,
+        backgroundColor: (theme) =>
+          theme.palette.mode === 'dark' ? '#1A2027' : '#fff',
+      }}
+    >
+        
+
         {employees.map((currentEmployees) => {
 
-
           return (
+
+            <Grid container spacing={2}>    
  
           <tr key={currentEmployees._id}>
-            <th>
-            <img className="employeeImage" src={currentEmployees.image} alt={currentEmployees.name}/>
+            <th style={{width: "100px"}}>
+           
+            <Img src={currentEmployees.image} alt={currentEmployees.name}/>
             </th>
             <th>{currentEmployees.name}</th>
             <th>{currentEmployees.area}</th>
           </tr>
+          
 
+            </Grid>
         )})}
-
+        </Paper>
       </div>
     );
 }

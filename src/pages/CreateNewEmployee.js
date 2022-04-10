@@ -53,7 +53,7 @@ function CreateNewEmployee() {
       )
       .then((response) => {
         console.log(response.data);
-        navigate(`/:${response.data.insertedId}`);
+        navigate(`/funcionarios`);
       })
       .catch((err) => {
         console.error(err);

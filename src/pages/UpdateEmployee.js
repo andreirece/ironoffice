@@ -1,11 +1,11 @@
-import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import React, { useState, useEffect } from "react";
+import { useNavigate, useParams } from "react-router-dom";
 import axios from "axios";
 
 import FormControl from "../components/FormControl";
 
-function CreateNewEmployee() {
-  const [newEmployee, setNewEmployee] = useState({
+function UpdateEmployee() {
+  const [employee, setEmployee] = useState({
     name: "",
     birthdate: "",
     contact: "",
@@ -16,8 +16,8 @@ function CreateNewEmployee() {
     image: "",
     Office: "",
   });
-
   const navigate = useNavigate();
+  const { id } = useParams();
   const allDays = [
     "Segunda-feira",
     "Terça-feira",
@@ -26,30 +26,41 @@ function CreateNewEmployee() {
     "Sexta-feira",
   ];
 
+  useEffect(() => {
+    let cloneEmployee = {};
+    axios
+      .get(`https://ironrest.herokuapp.com/ironoffice-andre-cintia/${id}`)
+      .then((response) => {
+        cloneEmployee = response.data;
+        delete cloneEmployee._id;
+        setEmployee(cloneEmployee);
+      })
+      .catch((err) => {
+        console.error(err);
+      });
+  }, [id]);
+
   function handleChange(event) {
-    setNewEmployee({
-      ...newEmployee,
-      [event.target.name]: event.target.value,
-    });
-    // }
+    setEmployee({ ...employee, [event.target.name]: event.target.value });
   }
+
   const handleCheck = (event) => {
-    let updatedList = [...newEmployee.daysOfTheWeek];
+    let updatedList = [...employee.daysOfTheWeek];
     if (event.target.checked) {
       updatedList.push(event.target.value);
     } else {
       updatedList.splice(updatedList.indexOf(event.target.value), 1);
     }
 
-    setNewEmployee({ ...newEmployee, daysOfTheWeek: updatedList });
+    setEmployee({ ...employee, daysOfTheWeek: updatedList });
   };
 
   function handleSubmit(event) {
     event.preventDefault();
     axios
-      .post(
-        `https://ironrest.herokuapp.com/ironoffice-andre-cintia`,
-        newEmployee
+      .put(
+        `https://ironrest.herokuapp.com/ironoffice-andre-cintia/${id}`,
+        employee
       )
       .then((response) => {
         console.log(response.data);
@@ -69,7 +80,7 @@ function CreateNewEmployee() {
           id="employeeImage"
           name="image"
           onChange={handleChange}
-          value={newEmployee.image}
+          value={employee.image}
         />
 
         <FormControl
@@ -77,7 +88,7 @@ function CreateNewEmployee() {
           id="employeeCreateName"
           name="name"
           onChange={handleChange}
-          value={newEmployee.name}
+          value={employee.name}
         />
 
         <FormControl
@@ -85,7 +96,7 @@ function CreateNewEmployee() {
           id="employeeBirthDate"
           name="birthDate"
           onChange={handleChange}
-          value={newEmployee.birthdate}
+          value={employee.birthdate}
           type="date"
         />
 
@@ -94,7 +105,7 @@ function CreateNewEmployee() {
           id="employeeContact"
           name="contact"
           onChange={handleChange}
-          value={newEmployee.contact}
+          value={employee.contact}
         />
 
         <FormControl
@@ -102,7 +113,7 @@ function CreateNewEmployee() {
           id="employeeFunction"
           name="function"
           onChange={handleChange}
-          value={newEmployee.function}
+          value={employee.function}
         />
 
         <FormControl
@@ -110,7 +121,7 @@ function CreateNewEmployee() {
           id="employeeArea"
           name="area"
           onChange={handleChange}
-          value={newEmployee.area}
+          value={employee.area}
         />
 
         <FormControl
@@ -118,7 +129,7 @@ function CreateNewEmployee() {
           id="employeeWorkRegime"
           name="workRegime"
           onChange={handleChange}
-          value={newEmployee.workRegime}
+          value={employee.workRegime}
         />
         <div>Dias de Trabalho:</div>
         {allDays.map((currentDay, index) => {
@@ -131,6 +142,13 @@ function CreateNewEmployee() {
               onChange={handleCheck}
               value={currentDay}
               type="checkbox"
+              checked={employee.daysOfTheWeek.map((checkedDay) => {
+                if (checkedDay === currentDay) {
+                  return true;
+                } else {
+                  return false;
+                }
+              })}
             />
           );
         })}
@@ -140,4 +158,4 @@ function CreateNewEmployee() {
   );
 }
 
-export default CreateNewEmployee;
+export default UpdateEmployee;

@@ -2,11 +2,15 @@ import axios from "axios";
 import React from "react";
 import { useEffect, useState } from "react";
 import { styled } from '@mui/material/styles';
+import { Link } from "react-router-dom";
+
+
 
 
 
 
 function EmployeesList() {
+
 
     const [employees, setEmployees] = useState([]);
 
@@ -18,10 +22,8 @@ function EmployeesList() {
         borderRadius: '50%',
       });
 
-  
     useEffect(() => {
     
-
       axios.get(`https://ironrest.herokuapp.com/ironoffice-andre-cintia`).then((response) => {
         setEmployees(...[response.data]);
       }).catch ((err)=> {console.error(err)});
@@ -35,76 +37,76 @@ function EmployeesList() {
       setEmployees(searchTable(inputValue));
      }
 
-  function searchTable(value) {
- const filteredData = [];
-
- if (value.length === 0) {
-   return employees; 
- }
-
- for (let i = 0; i < employees.length; ++i) {
-  const newValue = value.toLowerCase();
-
-  const user = setEmployees[i].usuario.toLowerCase();
-
-  if (user.includes(newValue)) {
-    filteredData.push(setEmployees[i]);
-  }
- }
- return filteredData;
-}
+    function searchTable(value) {
+    const filteredData = [];
+      if (value.length === 0) {
+        return employees; 
+      }
+      for (let i = 0; i < employees.length; ++i) {
+        const newValue = value.toLowerCase();
+        const user = employees[i].name.toLowerCase();
+        if (user.includes(newValue)) {
+          filteredData.push(employees[i]);
+        }
+    }
+    return filteredData;
+    }
 
 /*------------------------------------------------------------*/
- function sorted() {
-    const sortedEmployees = [...employees];
-    sortedEmployees.sort((a, b) => {
-    if (a.name < b.name) {
-      return -1;
-    }
-    if (a.name > b.name) {
-      return 1;
-    }
-    return 0;
-  });}
 
-  console.log(employees);
+  function sorted() {
+    const clone = [...employees];
+    clone.sort((a, b) => {
+      return a.name.localeCompare(b.name)
+    });
+    setEmployees(clone);
+  }
+
 /*------------------------------------------------------------*/
    
   return (
+
+      
     <table>
       <thead>
       <input
        className="form-input"
        onChange={handleInput} 
        id="input-table"
-       placeholder="Ache um Usuario"
+       placeholder="Nome do funcionário"
       />
         <tr>
           <th>Colaborador</th>
-          <th> <button type="button" onClick={() => sorted('Nome')}> Nome </button></th>
+          <th> <button type="button" onClick={() => sorted()}> Nome </button></th>
           <th>Contato</th>
           <th>Função</th>
           <th>Área</th>
         </tr>
       </thead>
       <tbody>
+      <div>
+
         {employees.map((currentEmployees) => (
-
-        <tr key={currentEmployees._id}>
-<Img src={currentEmployees.image} alt={currentEmployees.name}/>
-
-            <td>{currentEmployees.name}
-</td>
-            <td>{currentEmployees.contact}
-</td>
-           <td>{currentEmployees.function}
-</td>
-            <td>{currentEmployees.area}
-</td>
+          <tr key={currentEmployees._id}>
+          <Img src={currentEmployees.image} alt={currentEmployees.name}/>
+            <td>{currentEmployees.name}</td>
+            <td>{currentEmployees.contact}</td>
+           <td>{currentEmployees.function}</td>
+            <td>{currentEmployees.area}</td>
+            <Link  
+          title="details"
+          to={`/detailsemployee/${currentEmployees._id}`}
+        > SABER MAIS</Link>
           </tr>
+          
         ))}
+
+        </div>
       </tbody>
     </table>
+  
+
+
   );}
 
 export default EmployeesList;

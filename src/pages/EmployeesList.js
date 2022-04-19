@@ -3,6 +3,8 @@ import React from "react";
 import { useEffect, useState } from "react";
 import { styled } from "@mui/material/styles";
 import { Link } from "react-router-dom";
+import Button from '@mui/material/Button';
+import Stack from '@mui/material/Stack';
 
 function EmployeesList() {
   const [employees, setEmployees] = useState([]);
@@ -69,14 +71,11 @@ function EmployeesList() {
         id="input-table"
         placeholder="Nome do funcionário"
       />
-      <table>
+
+          <Stack direction="row" spacing={2}>
+          <Button variant="outlined" type="button" onClick={() => sorted()}> Nome </Button></Stack>
         <tr>
           <th>Colaborador</th>
-          <th>
-            <button type="button" onClick={() => sorted()}>
-              Nome
-            </button>
-          </th>
           <th>Contato</th>
           <th>Função</th>
           <th>Área</th>
@@ -101,7 +100,6 @@ function EmployeesList() {
             </td>
           </tr>
         ))}
-      </table>
     </div>
   );
 }

@@ -5,13 +5,26 @@ import EmployeeDelete from "../pages/EmployeeDelete";
 import Home from "../pages/Home";
 import UpdateEmployee from "../pages/UpdateEmployee";
 import DetailsEmployee from "../pages/DetailsEmployee";
+import SideBar1 from "../pages/sideBar";
+
+import Box from '@mui/material/Box';
+import Grid from '@mui/material/Grid';
 
 
 
 function App() {
   return (
 <div>
-      <Routes>
+<Box sx={{ flexGrow: 1 }}>
+      <Grid container spacing={2}>
+        <Grid>
+          <SideBar1 />
+          </Grid>
+          <Grid container
+            direction="row"
+            justifyContent="space-around"
+            alignItems="center">
+        <Routes>
         <Route exact path="/" component={Home} />
         <Route path="/" element={<Home />} />
         <Route path="/createnewemployee" element={<CreateNewEmployee />} />
@@ -20,8 +33,12 @@ function App() {
         <Route path="/updateemployee/:id" element={<UpdateEmployee />} />
         <Route path="/detailsemployee/:id" element={<DetailsEmployee />} />
       </Routes>
+      </Grid>
+      </Grid>
+    </Box>
       </div>
   );
 }
 
 export default App;
+

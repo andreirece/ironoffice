@@ -33,7 +33,7 @@ function DetailsEmployee() {
 
     return (
         <div>
-        <img src={employee.image} alt={employee.name}/>
+        <img style={{ height: "300px" }} src={employee.image} alt={employee.name}/>
          <h1>Nome: {employee.name}</h1>
           <p><b>Data de nascimento: </b>{employee.birthdate}</p>
           <p><b>Função:</b> {employee.function}</p>

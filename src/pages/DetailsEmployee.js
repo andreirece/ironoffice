@@ -37,13 +37,22 @@ function DetailsEmployee() {
           <p><b>Função:</b> {employee.function}</p>
           <p><b>Área:</b> {employee.area}</p>
           <p><b>Regime de trabalho:</b> {employee.workRegime}</p>
-          <p><b>Dias de trabalho (presencial):</b> {employee.daysOfTheWeek}</p>
+          <p>
+        <b>Dias de trabalho (presencial):</b>{" "}
+        {employee.daysOfTheWeek.map((currentDay) => {
+          return <p> {currentDay} </p>;
+        })}
+      </p>
           <p><b>Unidade:</b> {employee.office}</p>
           <Link  
           title="Editar"
           to={`/updateemployee/${id}`}
         ><button type="button"> Editar</button>
           </Link>
+          <b> </b>
+          <Link title="Deletar" to={`/employeedelete/${id}`}>
+        <button type="button"> Deletar</button>
+      </Link>
           </div>
   );
 }

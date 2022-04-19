@@ -19,11 +19,11 @@ function UpdateEmployee() {
   const navigate = useNavigate();
   const { id } = useParams();
   const allDays = [
-    "Segunda-feira",
-    "Terça-feira",
-    "Quarta-feira",
-    "Quinta-feira",
-    "Sexta-feira",
+    "segunda-feira",
+    "terça-feira",
+    "quarta-feira",
+    "quinta-feira",
+    "sexta-feira",
   ];
 
   useEffect(() => {
@@ -33,7 +33,7 @@ function UpdateEmployee() {
       .then((response) => {
         cloneEmployee = response.data;
         delete cloneEmployee._id;
-        setEmployee(cloneEmployee);
+        setEmployee({...cloneEmployee});
       })
       .catch((err) => {
         console.error(err);
@@ -73,7 +73,7 @@ function UpdateEmployee() {
 
   return (
     <div>
-      <h1>Novo Funcionário</h1>
+      <h1>Alterar informações</h1>
       <form onSubmit={handleSubmit}>
         <FormControl
           label="Carregar Foto"
@@ -142,13 +142,9 @@ function UpdateEmployee() {
               onChange={handleCheck}
               value={currentDay}
               type="checkbox"
-              checked={employee.daysOfTheWeek.map((checkedDay) => {
-                if (checkedDay === currentDay) {
-                  return true;
-                } else {
-                  return false;
-                }
-              })}
+              checked={employee.daysOfTheWeek.some(
+                (checkedDay) => checkedDay === currentDay
+              )}
             />
           );
         })}

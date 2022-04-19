@@ -4,23 +4,22 @@ import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { Link } from "react-router-dom";
 
-
 function DetailsEmployee() {
-    const [employee, showEmployee] = useState({
-      name: "",
-      birthdate: "",
-      contact: "",
-      function: "",
-      area: "",
-      workRegime: "",
-      daysOfTheWeek: [],
-      image: "",
-      office: "",
-    });
+  const [employee, showEmployee] = useState({
+    name: "",
+    birthdate: "",
+    contact: "",
+    function: "",
+    area: "",
+    workRegime: "",
+    daysOfTheWeek: [],
+    image: "",
+    office: "",
+  });
 
-    const { id } = useParams();
+  const { id } = useParams();
 
-    useEffect(() => {
+  useEffect(() => {
     axios
       .get(`https://ironrest.herokuapp.com/ironoffice-andre-cintia/${id}`)
       .then((response) => {
@@ -30,8 +29,7 @@ function DetailsEmployee() {
       .catch((err) => console.error(err));
   }, [id]);
 
-
-    return (
+  return (
         <div>
         <img style={{ height: "300px" }} src={employee.image} alt={employee.name}/>
          <h1>Nome: {employee.name}</h1>
@@ -46,15 +44,8 @@ function DetailsEmployee() {
           to={`/updateemployee/${id}`}
         ><button type="button"> Editar</button>
           </Link>
-
-          <Link  
-          title="Editar"
-          to={`/employeedelete/${id}`}
-        ><button type="button"> Deletar</button>
-          </Link>
-
           </div>
-    );}
-
+  );
+}
 
 export default DetailsEmployee;

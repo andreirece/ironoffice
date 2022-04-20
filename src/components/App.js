@@ -25,7 +25,6 @@ function App() {
             justifyContent="space-around"
             alignItems="center">
         <Routes>
-        <Route exact path="/" component={Home} />
         <Route path="/" element={<Home />} />
         <Route path="/createnewemployee" element={<CreateNewEmployee />} />
         <Route path="/funcionarios" element={<EmployeesList />} />

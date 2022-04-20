@@ -3,8 +3,8 @@ import React from "react";
 import { useEffect, useState } from "react";
 import { styled } from "@mui/material/styles";
 import { Link } from "react-router-dom";
-import Button from '@mui/material/Button';
-import Stack from '@mui/material/Stack';
+import Button from "@mui/material/Button";
+import Stack from "@mui/material/Stack";
 
 function EmployeesList() {
   const [employees, setEmployees] = useState([]);
@@ -71,35 +71,37 @@ function EmployeesList() {
         id="input-table"
         placeholder="Nome do funcionário"
       />
-
-          <Stack direction="row" spacing={2}>
-          <Button variant="outlined" type="button" onClick={() => sorted()}> Nome </Button></Stack>
-        <tr>
-          <th>Colaborador</th>
-          <th>Contato</th>
-          <th>Função</th>
-          <th>Área</th>
+      <Stack direction="row" spacing={2}>
+        <Button variant="outlined" type="button" onClick={() => sorted()}>
+          {" "}
+          Nome{" "}
+        </Button>
+      </Stack>
+      <tr>
+        <th>Colaborador</th>
+        <th>Contato</th>
+        <th>Função</th>
+        <th>Área</th>
+      </tr>
+      {employees.map((currentEmployees) => (
+        <tr key={currentEmployees._id}>
+          <td>
+            <Img src={currentEmployees.image} alt={currentEmployees.name} />
+          </td>
+          <td>{currentEmployees.name}</td>
+          <td>{currentEmployees.contact}</td>
+          <td>{currentEmployees.function}</td>
+          <td>{currentEmployees.area}</td>
+          <td>
+            <Link
+              title="details"
+              to={`/detailsemployee/${currentEmployees._id}`}
+            >
+              SABER MAIS
+            </Link>
+          </td>
         </tr>
-
-        {employees.map((currentEmployees) => (
-          <tr key={currentEmployees._id}>
-            <td>
-              <Img src={currentEmployees.image} alt={currentEmployees.name} />
-            </td>
-            <td>{currentEmployees.name}</td>
-            <td>{currentEmployees.contact}</td>
-            <td>{currentEmployees.function}</td>
-            <td>{currentEmployees.area}</td>
-            <td>
-              <Link
-                title="details"
-                to={`/detailsemployee/${currentEmployees._id}`}
-              >
-                SABER MAIS
-              </Link>
-            </td>
-          </tr>
-        ))}
+      ))}
     </div>
   );
 }

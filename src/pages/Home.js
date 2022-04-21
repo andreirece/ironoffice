@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
+import image from "../imagens/welcome.png"
+
 
 function Home() {
   const [birthdates, setBirthdates] = useState([]);
@@ -25,18 +27,24 @@ function Home() {
   }, []);
 
   return (
-    <div
-      style={{
-        backgroundColor: "#FF993A",
-        padding: "20px 50px",
-        borderRadius: "2%",
-        color: "white",
-      }}
-    >
-      ANIVERSARIANTES DO MÊS:
+    <div>
+    <div><img src={image} alt="welcome" /></div>
+    <div>
+      <h3>ANIVERSARIANTES DO MÊS:</h3>
       {birthdates.map((current) => {
         return (
-          <div key={current._id} style={{ display: "flex" }}>
+          <div key={current._id} style={{            
+          backgroundColor: "#4864fc",
+          width: 800,
+          position: "center",
+          padding: "12px",
+          color: "white",
+          font:"lato",
+          display: "flex",
+          margin:5,
+          boxShadow: "0px 0px 25px rgba(48, 73, 191, 0.30)",
+          borderRadius: 16,
+        }}>
             <img
               src={current.image}
               alt={current.name}
@@ -49,13 +57,14 @@ function Home() {
               }}
             />
             <div style={{ marginTop: "15px" }}>
-              <div>{current.name}</div>
+              <div><h3>{current.name}🎉</h3></div>
               <div>{current.area}</div>
               <div>{`${current.birthdate.substring(8,10)}/${current.birthdate.substring(5,7)}`}</div>
             </div>
           </div>
         );
       })}
+    </div>
     </div>
   );
 }

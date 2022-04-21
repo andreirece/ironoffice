@@ -6,10 +6,8 @@ import Home from "../pages/Home";
 import UpdateEmployee from "../pages/UpdateEmployee";
 import DetailsEmployee from "../pages/DetailsEmployee";
 import SideBar1 from "../pages/sideBar";
-
 import Box from '@mui/material/Box';
 import Grid from '@mui/material/Grid';
-
 
 
 function App() {
@@ -20,9 +18,9 @@ function App() {
         <Grid>
           <SideBar1 />
           </Grid>
-          <Grid container
+          <Grid container spacing={4}
             direction="row"
-            justifyContent="space-around"
+            justifyContent="center"
             alignItems="center">
         <Routes>
         <Route path="/" element={<Home />} />

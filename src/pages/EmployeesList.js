@@ -6,10 +6,33 @@ import { Link } from "react-router-dom";
 import Button from "@mui/material/Button";
 import Stack from "@mui/material/Stack";
 
+
+
 function EmployeesList() {
   const [employees, setEmployees] = useState([]);
 
+  const mystyle = {
+
+    left: 0,
+    right: 0,
+    top: 0,
+    bottom: 0,
+    background: "#FFFFFF",
+    boxShadow: "0px 0px 25px rgba(48, 73, 191, 0.30)",
+    borderRadius: 16,
+    margin: 30,
+  }
+
+  const mystyle2 = {
+    lineHeight: 4,
+    boxShadow: "0 0 3px 2px #cec7c759",
+    borderRadius: 20,
+    margin: 20,
+    padding: '1.5em',
+  }
+
   const Img = styled("img")({
+    padding: 10,
     margin: "auto",
     display: "inline",
     width: "100px",
@@ -65,43 +88,58 @@ function EmployeesList() {
   return (
     <div>
       {" "}
+      
       <input
         className="form-input"
         onChange={handleInput}
         id="input-table"
-        placeholder="Nome do funcionário"
-      />
-      <Stack direction="row" spacing={2}>
+        placeholder="  Nome do funcionário"
+        style={{
+        width: 323,
+        height: 56,
+        left: 0,
+        top: 0,
+        margin:8,
+        backgroundColor: "#FFFFFF",
+        borderColor:"#ADD8E6",
+        borderRadius: "16px",
+        }}
+ />
+      <Stack direction="row" spacing={5} >
         <Button variant="outlined" type="button" onClick={() => sorted()}>
           {" "}
           Nome{" "}
         </Button>
       </Stack>
-      <tr>
-        <th>Colaborador</th>
+      <table>
+      <tr style={mystyle2}>
+        <th>Foto</th>
         <th>Contato</th>
         <th>Função</th>
         <th>Área</th>
       </tr>
       {employees.map((currentEmployees) => (
-        <tr key={currentEmployees._id}>
+        <tr style={mystyle} key={currentEmployees._id}>
           <td>
-            <Img src={currentEmployees.image} alt={currentEmployees.name} />
+            <Img src={currentEmployees.image} alt={currentEmployees.name} />  
           </td>
-          <td>{currentEmployees.name}</td>
+          <td><h3>{currentEmployees.name}</h3></td>
           <td>{currentEmployees.contact}</td>
           <td>{currentEmployees.function}</td>
           <td>{currentEmployees.area}</td>
           <td>
+          
             <Link
               title="details"
               to={`/detailsemployee/${currentEmployees._id}`}
             >
-              SABER MAIS
+              SABER MAIS   
             </Link>
+            
           </td>
         </tr>
       ))}
+      </table>
     </div>
   );
 }

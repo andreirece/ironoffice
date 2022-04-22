@@ -15,6 +15,14 @@ import building from "../imagens/2.png";
 const Item = styled(Paper)();
 
 function App() {
+  const limitDisplay = window.screen.width < 1500;
+  let displayImg = "";
+  if (limitDisplay) {
+    displayImg = { display: "none" };
+  }
+
+  console.log(window.screen.width);
+
   return (
     <div>
       <Box sx={{ flexGrow: 1 }}>
@@ -27,8 +35,9 @@ function App() {
               <div
                 style={{
                   position: "absolute",
-                  width: "800px",
+                  width: 910,
                   top: 80,
+                  left: 320,
                 }}
               >
                 <Routes>
@@ -54,7 +63,7 @@ function App() {
               </div>
             </Item>
           </Grid>
-          <Grid item xs={3}>
+          <Grid item xs={3} {...displayImg}>
             <Item>
               <div
                 style={{

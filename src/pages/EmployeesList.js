@@ -121,41 +121,45 @@ function EmployeesList() {
           borderRadius: "16px",
         }}
       />
-      <table style={{ position: "center", maxWidth: 1000 }}>
-        <tr style={{ mystyle2, cursor: "pointer" }}>
-          <th>Foto</th>
-          <th onClick={() => handleClickSortField("name")}>Colaborador</th>
-          <th onClick={() => handleClickSortField("contact")}>Contato</th>
-          <th onClick={() => handleClickSortField("function")}>Função</th>
-          <th onClick={() => handleClickSortField("area")}>Área</th>
-        </tr>
-        {employees
-          .filter(filterEmployees)
-          .sort(sortEmployees)
-          .map((currentEmployees) => (
-            <tr style={mystyle} key={currentEmployees._id}>
-              <td>
-                <Img src={currentEmployees.image} alt={currentEmployees.name} />
-              </td>
-              <td>
-                <h5>{currentEmployees.name}</h5>
-              </td>
-              <td>{currentEmployees.contact}</td>
-              <td>{currentEmployees.function}</td>
-              <td>{currentEmployees.area}</td>
-              <td>
-                <Link
-                  title="details"
-                  to={`/detailsemployee/${currentEmployees._id}`}
-                >
-                  <button type="button" style={buttonStyle}>
-                    {" "}
-                    Saber mais{" "}
-                  </button>
-                </Link>
-              </td>
-            </tr>
-          ))}
+      <table width="100%" style={{ position: "center", maxWidth: 1000 }}>
+        <tbody>
+          <tr style={{ ...mystyle2, cursor: "pointer" }}>
+            <th>Foto</th>
+            <th onClick={() => handleClickSortField("name")}>Colaborador</th>
+            <th onClick={() => handleClickSortField("contact")}>Contato</th>
+            <th onClick={() => handleClickSortField("function")}>Função</th>
+            <th onClick={() => handleClickSortField("area")}>Área</th>
+          </tr>
+          {employees
+            .filter(filterEmployees)
+            .sort(sortEmployees)
+            .map((currentEmployees) => (
+              <tr style={mystyle} key={currentEmployees._id}>
+                <td>
+                  <Img
+                    src={currentEmployees.image}
+                    alt={currentEmployees.name}
+                  />
+                </td>
+                <td>
+                  <h5>{currentEmployees.name}</h5>
+                </td>
+                <td>{currentEmployees.contact}</td>
+                <td>{currentEmployees.function}</td>
+                <td>{currentEmployees.area}</td>
+                <td>
+                  <Link
+                    title="details"
+                    to={`/detailsemployee/${currentEmployees._id}`}
+                  >
+                    <button type="button" style={buttonStyle}>
+                      Saber mais
+                    </button>
+                  </Link>
+                </td>
+              </tr>
+            ))}
+        </tbody>
       </table>
     </div>
   );

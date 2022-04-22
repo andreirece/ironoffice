@@ -30,18 +30,28 @@ function Home() {
     <div>
     <div><img src={image} alt="welcome" /></div>
     <div>
-      <h3>ANIVERSARIANTES DO MÊS:</h3>
+      <h5 style={{            
+          width: 800,
+          position: "center",
+          padding: "12px",
+          color: "#4864fc",
+          font:"lato",
+          display: "flex",
+          margin:5,
+          boxShadow: "0px 0px 25px rgba(48, 73, 191, 0.30)",
+          borderRadius: 16,
+        }}><b>ANIVERSARIANTES DO MÊS:</b></h5>
       {birthdates.map((current) => {
         return (
           <div key={current._id} style={{            
           backgroundColor: "#4864fc",
           width: 800,
           position: "center",
-          padding: "12px",
+          padding: "10px",
           color: "white",
           font:"lato",
           display: "flex",
-          margin:5,
+          margin:4,
           boxShadow: "0px 0px 25px rgba(48, 73, 191, 0.30)",
           borderRadius: 16,
         }}>
@@ -51,8 +61,8 @@ function Home() {
               style={{
                 margin: "10px",
                 display: "inline",
-                width: "100px",
-                height: "100px",
+                width: "80px",
+                height: "80px",
                 borderRadius: "50%",
               }}
             />

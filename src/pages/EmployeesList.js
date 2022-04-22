@@ -12,15 +12,10 @@ function EmployeesList() {
   const [employees, setEmployees] = useState([]);
 
   const mystyle = {
-
-    left: 0,
-    right: 0,
-    top: 0,
-    bottom: 0,
     background: "#FFFFFF",
     boxShadow: "0px 0px 25px rgba(48, 73, 191, 0.30)",
     borderRadius: 16,
-    margin: 30,
+    margin: 60,
   }
 
   const mystyle2 = {
@@ -39,6 +34,15 @@ function EmployeesList() {
     height: "100px",
     borderRadius: "50%",
   });
+
+  const buttonStyle = {
+    width: "180px",
+    height: "60px",
+    background: "transparent",
+    border: "1px solid #91C9FF",
+    outline: "none",
+    borderRadius: 8,
+  }
 
   useEffect(() => {
     axios
@@ -98,7 +102,8 @@ function EmployeesList() {
         width: 323,
         height: 56,
         left: 0,
-        top: 0,
+        top: 10,
+        marginTop:1000,
         margin:8,
         backgroundColor: "#FFFFFF",
         borderColor:"#ADD8E6",
@@ -111,9 +116,11 @@ function EmployeesList() {
           Nome{" "}
         </Button>
       </Stack>
-      <table>
+      <table style={{position:"center",
+      maxWidth: 1000}}>
       <tr style={mystyle2}>
         <th>Foto</th>
+        <th>Nome</th>
         <th>Contato</th>
         <th>Função</th>
         <th>Área</th>
@@ -123,7 +130,7 @@ function EmployeesList() {
           <td>
             <Img src={currentEmployees.image} alt={currentEmployees.name} />  
           </td>
-          <td><h3>{currentEmployees.name}</h3></td>
+          <td><h5>{currentEmployees.name}</h5></td>
           <td>{currentEmployees.contact}</td>
           <td>{currentEmployees.function}</td>
           <td>{currentEmployees.area}</td>
@@ -133,7 +140,7 @@ function EmployeesList() {
               title="details"
               to={`/detailsemployee/${currentEmployees._id}`}
             >
-              SABER MAIS   
+             <button type="button" style={buttonStyle}> Saber mais </button>  
             </Link>
             
           </td>

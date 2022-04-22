@@ -73,7 +73,7 @@ style={{color: "#ffffff"}}
             bottom: 60,
             width: "300px",
             boxSizing: "initial",
-            backgroundColor: "#090c0e",
+            backgroundColor: "#1B2631",
             linkColor: "#ffffff",
             boxShadow: "0px 0px 25px rgba(48, 73, 191, 0.30)",
             borderRadius: 18,

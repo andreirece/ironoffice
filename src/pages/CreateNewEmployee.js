@@ -31,7 +31,6 @@ function CreateNewEmployee() {
       ...newEmployee,
       [event.target.name]: event.target.value,
     });
-    // }
   }
 
   const buttonStyle = {

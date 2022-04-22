@@ -26,6 +26,15 @@ function UpdateEmployee() {
     "sexta-feira",
   ];
 
+  const buttonStyle = {
+    width: "180px",
+    height: "60px",
+    background: "transparent",
+    border: "1px solid #91C9FF",
+    outline: "none",
+    borderRadius: 8,
+  }
+
   useEffect(() => {
     let cloneEmployee = {};
     axios
@@ -148,7 +157,7 @@ function UpdateEmployee() {
             />
           );
         })}
-        <button type="submit">Salvar alterações</button>
+        <button type="submit" style={buttonStyle}>Salvar alterações</button>
       </form>
     </div>
   );

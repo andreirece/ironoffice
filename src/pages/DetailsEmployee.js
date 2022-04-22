@@ -17,6 +17,16 @@ function DetailsEmployee() {
     office: "",
   });
 
+const buttonStyle = {
+  width: "180px",
+  height: "60px",
+  background: "transparent",
+  border: "1px solid #91C9FF",
+  outline: "none",
+  borderRadius: 8,
+}
+
+
   const { id } = useParams();
 
   useEffect(() => {
@@ -47,11 +57,11 @@ function DetailsEmployee() {
           <Link  
           title="Editar"
           to={`/updateemployee/${id}`}
-        ><button type="button"> Editar</button>
+        ><button type="button" style={buttonStyle}> Editar</button>
           </Link>
           <b> </b>
           <Link title="Deletar" to={`/employeedelete/${id}`}>
-        <button type="button"> Deletar</button>
+        <button type="button" style={buttonStyle}> Deletar</button>
       </Link>
           </div>
   );

@@ -16,6 +16,7 @@ function Home() {
           if (actualDate.includes(today)) {
             birthdatesClone.push(currentEmployee);
           }
+          return birthdatesClone;
         });
         setBirthdates(...[birthdatesClone]);
       })
@@ -51,7 +52,10 @@ function Home() {
             <div style={{ marginTop: "15px" }}>
               <div>{current.name}</div>
               <div>{current.area}</div>
-              <div>{`${current.birthdate.substring(8,10)}/${current.birthdate.substring(5,7)}`}</div>
+              <div>{`${current.birthdate.substring(
+                8,
+                10
+              )}/${current.birthdate.substring(5, 7)}`}</div>
             </div>
           </div>
         );

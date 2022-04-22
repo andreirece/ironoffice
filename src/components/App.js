@@ -16,12 +16,6 @@ const Item = styled(Paper)();
 
 function App() {
   const limitDisplay = window.screen.width < 1500;
-  let displayImg = "";
-  if (limitDisplay) {
-    displayImg = { display: "none" };
-  }
-
-  console.log(window.screen.width);
 
   return (
     <div>
@@ -63,7 +57,11 @@ function App() {
               </div>
             </Item>
           </Grid>
-          <Grid item xs={3} {...displayImg}>
+          <Grid
+            item
+            xs={3}
+            style={{ display: limitDisplay ? "none" : "block" }}
+          >
             <Item>
               <div
                 style={{

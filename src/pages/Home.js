@@ -25,7 +25,7 @@ function Home() {
       .catch((err) => {
         console.error(err);
       });
-  }, []);
+  }, [birthdatesClone, today]);
 
   return (
     <div>
